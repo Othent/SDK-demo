@@ -23,7 +23,7 @@ const Nav = () => {
 
   useEffect(() => {
     async function createOthentInstance() {
-      const othent = await Othent({ API_KEY: 'API_KEY', API_ID: 'API_ID' });
+      const othent = await Othent({API_ID: 'API_ID'});
       setOthentInstance(othent);
     }
     createOthentInstance();
