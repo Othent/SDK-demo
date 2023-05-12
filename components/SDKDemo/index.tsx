@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { FeatureTextSmall } from '../common';
-
 import { DMSans700, SpaceGrotesk700, DMSans500 } from '../../utils/fonts';
 import { AnimatePresence, motion } from 'framer-motion';
 import * as Styled from './styles';
@@ -11,12 +10,21 @@ import { Othent } from 'othent';
 
 const SDKDemo = () => {
 
-
   const [output, setOutput] = useState('*** Output Response ***');
 
 
+  const [othent, setOthent] = useState(null);
+  useEffect(() => {
+    const initializeOthent = async () => {
+      const othentInstance = await Othent({ API_ID: '1f73e23e3437dd623f5530e90ac1d1b2' });
+      setOthent(othentInstance);
+    };
+    initializeOthent();
+  }, []);
+
+
+
   const handlePingClick = async () => {
-    const othent = await Othent({ API_ID: '1f73e23e3437dd623f5530e90ac1d1b2' });
     const ping = await othent.ping();
     const message = 'Ping button clicked: ' + JSON.stringify(ping);
     console.log(message);
@@ -25,7 +33,6 @@ const SDKDemo = () => {
 
 
   const handleAddCallbackURL = async () => {
-    const othent = await Othent({ API_ID: '1f73e23e3437dd623f5530e90ac1d1b2' });
     const addCallbackURL = await othent.addCallbackURL({ callbackURL: 'https://hello.com' });
     const message = 'Add callback URL button clicked: ' + JSON.stringify(addCallbackURL);
     console.log(message);
@@ -34,7 +41,6 @@ const SDKDemo = () => {
 
 
   const handleGetAPIKeys = async () => {
-    const othent = await Othent({ API_ID: '1f73e23e3437dd623f5530e90ac1d1b2' });
     const API_keys = await othent.getAPIKeys()
     const message = 'Get API keys button clicked: ' + JSON.stringify(API_keys);
     console.log(message);
@@ -43,7 +49,6 @@ const SDKDemo = () => {
 
 
   const handleLogInClick = async () => {
-    const othent = await Othent({ API_ID: '1f73e23e3437dd623f5530e90ac1d1b2' });
     const logIn = await othent.logIn()
     const message = 'Log In button clicked: ' + JSON.stringify(logIn);
     console.log(message);
@@ -51,7 +56,6 @@ const SDKDemo = () => {
   };
 
   const handleLogOutClick = async () => {
-    const othent = await Othent({ API_ID: '1f73e23e3437dd623f5530e90ac1d1b2' });
     const logOut = await othent.logOut()
     const message = 'Log Out button clicked: ' + JSON.stringify(logOut);
     console.log(message);
@@ -59,7 +63,6 @@ const SDKDemo = () => {
   };
 
   const handleUserDetailsClick = async () => {
-    const othent = await Othent({ API_ID: '1f73e23e3437dd623f5530e90ac1d1b2' });
     const userDetails = await othent.userDetails()
     const message = 'User Details button clicked: ' + JSON.stringify(userDetails);
     console.log(message);
@@ -67,7 +70,6 @@ const SDKDemo = () => {
   };
 
   const handleReadContractClick = async () => {
-    const othent = await Othent({ API_ID: '1f73e23e3437dd623f5530e90ac1d1b2' });
     const readContract = await othent.readContract()
     const message = 'Read Contract button clicked: ' + JSON.stringify(readContract);
     console.log(message);
@@ -77,13 +79,12 @@ const SDKDemo = () => {
 
   const handleSignTransactionWarp = async () => {
     try {
-      const othent = await Othent({ API_ID: 'API1f73e23e3437dd623f5530e90ac1d1b2' });
       const response = await othent.signTransactionWarp({
         othentFunction: 'sendTransaction', 
         data: {
           toContractId: '2W9NoIJM1SuaFUaSOJsui_5lD_NvCHTjez5HKe2SjYU', 
           toContractFunction: 'createPost', 
-          txnData: { post: 'Hello World!' } 
+          txnData: { post: 'Othent TEST TEST' } 
         }, 
         tags: [ 
           {name: 'Test', value: 'Tag'} 
@@ -102,13 +103,12 @@ const SDKDemo = () => {
 
   const handleSendTransactionWarp = async () => {
     try {
-      const othent = await Othent({ API_ID: 'API1f73e23e3437dd623f5530e90ac1d1b2' });
       const signedTransaction = await othent.signTransactionWarp({
         othentFunction: 'sendTransaction', 
         data: {
           toContractId: '2W9NoIJM1SuaFUaSOJsui_5lD_NvCHTjez5HKe2SjYU', 
           toContractFunction: 'createPost', 
-          txnData: { post: 'Hello World!' } 
+          txnData: { post: 'Othent TEST TEST' } 
         }, 
         tags: [ 
           {name: 'Test', value: 'Tag'} 
@@ -129,12 +129,11 @@ const SDKDemo = () => {
 
   const handleSignTransactionArweave = async (file) => {
     try {
-      const othent = await Othent({ API_ID: 'API1f73e23e3437dd623f5530e90ac1d1b2' });
       const response = await othent.signTransactionArweave({
         othentFunction: 'uploadData', 
         data: file,
         tags: [
-          {name: 'Content-Type', value: 'img/png'},
+          {name: 'Content-Type', value: file.type},
         ]
       });
       const message = 'Sign transaction Arweave button clicked: ' + JSON.stringify(response)
@@ -154,12 +153,11 @@ const SDKDemo = () => {
 
   const handleSendTransactionArweave = async (file) => {
     try {
-      const othent = await Othent({ API_ID: 'API1f73e23e3437dd623f5530e90ac1d1b2' });
       const signedTransaction = await othent.signTransactionArweave({
         othentFunction: 'uploadData', 
         data: file,
         tags: [ 
-          {name: 'Content-Type', value: 'img/png'} 
+          {name: 'Content-Type', value: file.type} 
         ]
       });
 
@@ -180,12 +178,11 @@ const SDKDemo = () => {
 
   const handleSignTransactionBundlr = async (file) => {
     try {
-      const othent = await Othent({ API_ID: 'API1f73e23e3437dd623f5530e90ac1d1b2' });
       const response = await othent.signTransactionBundlr({
         othentFunction: 'uploadData', 
         data: file,
         tags: [
-          {name: 'Content-Type', value: 'img/png'},
+          {name: 'Content-Type', value: file.type},
         ]
       });
       const message = 'Sign transaction Bundlr button clicked: ' + JSON.stringify(response)
@@ -205,12 +202,11 @@ const SDKDemo = () => {
 
   const handleSendTransactionBundlr = async (file) => {
     try {
-      const othent = await Othent({ API_ID: 'API1f73e23e3437dd623f5530e90ac1d1b2' });
       const signedTransaction = await othent.signTransactionBundlr({
         othentFunction: 'uploadData', 
         data: file,
         tags: [ 
-          {name: 'Content-Type', value: 'img/png'} 
+          {name: 'Content-Type', value: file.type} 
         ]
       });
 
@@ -245,7 +241,6 @@ const SDKDemo = () => {
     Opy/0Yb8RMNKoX0QvUeD7NOK+hXBwIDBgm+QrDjgHQ6+RXs72cMiHjl2aib/YRwb
     wW68pg9G6C+iSM9MMwlbBv0CAwEAAQ==
     -----END PUBLIC KEY-----`
-    const othent = await Othent({ API_ID: '1f73e23e3437dd623f5530e90ac1d1b2' });
     const initializeJWK = await othent.initializeJWK({JWK_public_key: JWK_public_key})
     const message = 'Backup Keyfile button clicked: ' + JSON.stringify(initializeJWK);
     console.log(message);
@@ -256,7 +251,6 @@ const SDKDemo = () => {
 
   const handleJWKBackupTxnClick = async () => {
     const JWK_signed_JWT = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnb29nbGUtb2F1dGgyfDExMzM3ODIxNjg3NjIxNjM0NjAxNiIsImNvbnRyYWN0X2lkIjoicXYtSjJIVm04ZWV6M0VOaVN3S2FWdVZSajFkYlhRMDZOQkI1NkdJNnRhbyIsInRhZ3MiOlt7Im5hbWUiOiJUZXN0IiwidmFsdWUiOiJKV0tKV0tKV0sifV0sImNvbnRyYWN0X2lucHV0Ijp7ImRhdGEiOnsidG9Db250cmFjdEZ1bmN0aW9uIjoiY3JlYXRlUG9zdCIsInRvQ29udHJhY3RJZCI6IjJXOU5vSUpNMVN1YUZVYVNPSnN1aV81bERfTnZDSFRqZXo1SEtlMlNqWVUiLCJ0eG5EYXRhIjp7ImJsb2dfcG9zdF8xIjoiQkFISEhISEhISEhIISJ9fSwib3RoZW50RnVuY3Rpb24iOiJKV0tCYWNrdXBUeG4ifSwiaWF0IjoxNjgyMDM0NjU3LCJleHAiOjIwNDIwMzQ2NTcsImlzcyI6Imh0dHBzOi8vT3RoZW50LmlvIn0.KdEbgqKLOg2mQf8txKfra1RXV24apWsxx9beSnseKDs-mGWE6XIiWT3SeI2BGLNlQcfMqVyAOnGUVt4tbV-wDLF8IeVUKQpYvSnQRSjI9-0OvlC4lDF33EAH7qWg5n4Oof7belNr1-jHdS448G5Yn4u8VWtUizYKDrIMz7z-6wce8J3thf85BO7GqS0m2Gl-YwMPlxw7TvFBGufp0SnMKEq1ISayJevMKnubTM13jdF3Slsv9pZ5hZ1mA_aofIkbH3pvxtBdv3VSf_QNALasloCNmduHrXNv4QdX0sIp1N6VGDEi5cqsrWHUUe4Vuep1BaQx3vK3NTg_qYJU6cgHlPF4NnBNQEWcFupb5NL6uXIcrutY29ClaYfbm1tN_NmSZjyMcgPGOVtLcJy_nY9GRKy_0bo_WFrpgfvcWJtQ3dnC6iD_hg87BDLWgCzkA_0yL-Tkt2JDVfumzHDsReYbixyV-H1c-UCm8XC0UpGRV0Fv0lNP0fmkzXqH8USxaQ0Dylj5QoK_CbRNq9eXNT6uaBs_XAwuGm8hoOVIXLqnN0pbHUnRZopNAb5q8qvdGXI20dbOZfIcwiELM8Vx_z8KSv4jmLF6i8b4HbF9bnAyZRvDPB36PAM6hYP7KPb3Rl46pOxxdXk5Q4xquKRLNQW1U8G9WvpkUiJ4PyZHe2hz8B0'
-    const othent = await Othent({ API_ID: '1f73e23e3437dd623f5530e90ac1d1b2' });
     const JWKBackupTxn = await othent.JWKBackupTxn({JWK_signed_JWT})
     const message = 'JWK backup transaction button clicked: ' + JSON.stringify(JWKBackupTxn);
     console.log(message);
@@ -268,7 +262,6 @@ const SDKDemo = () => {
 
   const handleReadCustomContract = async () => {
     const contract_id = '2W9NoIJM1SuaFUaSOJsui_5lD_NvCHTjez5HKe2SjYU'
-    const othent = await Othent({ API_ID: '1f73e23e3437dd623f5530e90ac1d1b2' });
     const readCustomContract = await othent.readCustomContract({contract_id})
     const message = 'Read custom contract button clicked: ' + JSON.stringify(readCustomContract);
     console.log(message);
