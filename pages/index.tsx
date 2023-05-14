@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <SectionOne>
       <Head>
-        <title>Othent - Merging Web2 to Web3 user logins with a familiar and simple interface.</title>
+        <title>Othent Demo - Merging Web2 to Web3 user logins with a familiar and simple interface.</title>
         <link rel='icon' href='https://Othent.io/favicon.ico' />
         <meta property="og:title" content="Othent - Merging Web2 to Web3 user logins with a familiar and simple interface."/>
         <meta property='og:description' content='Othent - Merging Web2 to Web3 user logins with a familiar and simple interface.' />
