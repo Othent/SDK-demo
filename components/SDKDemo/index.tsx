@@ -108,7 +108,7 @@ const SDKDemo = () => {
         data: {
           toContractId: 'tQKJCf2E9lIaNTjM8ELK6ATlJtef8cVmq68c9XnVuj0', 
           toContractFunction: 'createPost', 
-          txnData: { post: 'Othent TEST TEST' } 
+          txnData: { post: 'Lorimer TEST' } 
         }, 
         tags: [ 
           {name: 'Test', value: 'Tag'} 
@@ -261,7 +261,7 @@ const SDKDemo = () => {
 
 
   const handleReadCustomContract = async () => {
-    const contract_id = '2W9NoIJM1SuaFUaSOJsui_5lD_NvCHTjez5HKe2SjYU'
+    const contract_id = 'tQKJCf2E9lIaNTjM8ELK6ATlJtef8cVmq68c9XnVuj0'
     const readCustomContract = await othent.readCustomContract({contract_id})
     const message = 'Read custom contract button clicked: ' + JSON.stringify(readCustomContract);
     console.log(message);
