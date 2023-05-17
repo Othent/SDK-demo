@@ -106,7 +106,7 @@ const SDKDemo = () => {
       const signedTransaction = await othent.signTransactionWarp({
         othentFunction: 'sendTransaction', 
         data: {
-          toContractId: '2W9NoIJM1SuaFUaSOJsui_5lD_NvCHTjez5HKe2SjYU', 
+          toContractId: 'tQKJCf2E9lIaNTjM8ELK6ATlJtef8cVmq68c9XnVuj0', 
           toContractFunction: 'createPost', 
           txnData: { post: 'Othent TEST TEST' } 
         }, 
