@@ -40,9 +40,9 @@ const SDKDemo = () => {
   };
 
 
-  const handleGetAPIKeys = async () => {
-    const API_keys = await othent.getAPIKeys()
-    const message = 'Get API keys button clicked: ' + JSON.stringify(API_keys);
+  const handleGetAPIID = async () => {
+    const API_ID = await othent.getAPIID()
+    const message = 'Get API keys button clicked: ' + JSON.stringify(API_ID);
     console.log(message);
     setOutput(message);
   };
@@ -284,7 +284,7 @@ const SDKDemo = () => {
 
           <Styled.DemoButton onClick={handlePingClick}>Ping</Styled.DemoButton>
           <Styled.DemoButton onClick={handleAddCallbackURL}>Add callback URL</Styled.DemoButton>
-          <Styled.DemoButton onClick={handleGetAPIKeys}>API Keys</Styled.DemoButton>
+          <Styled.DemoButton onClick={handleGetAPIID}>API ID</Styled.DemoButton>
           <Styled.DemoButton onClick={handleLogInClick}>Log In</Styled.DemoButton>
           <Styled.DemoButton onClick={handleLogOutClick}>Log Out</Styled.DemoButton>
           <Styled.DemoButton onClick={handleUserDetailsClick}>User Details</Styled.DemoButton>
