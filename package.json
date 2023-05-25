@@ -7,10 +7,12 @@
   },
   "dependencies": {
     "buffer": "^6.0.3",
+    "crypto": "^1.0.1",
     "debug": "^4.3.4",
     "framer-motion": "^10.12.4",
+    "jose": "^4.14.4",
     "next": "latest",
-    "othent": "^1.0.613",
+    "othent": "^1.0.615",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
