@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Button from '../Button'
-import Input from "../Input"
+import Button from '../Button';
+import Input from "../Input";
 import { FeatureHeaderText, FeaturesContainer } from '../common';
 
 interface Props {
@@ -39,16 +39,16 @@ export const Container = styled.div`
   align-items: center;
   gap: 1rem;
   @media (min-width: 1024px) {
-      padding: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-    @media (min-width: 1100px) {
-      width: 70%;
-      margin: auto;
-    }
+  @media (min-width: 1100px) {
+    width: 70%;
+    margin: auto;
+  }
 `;
 
 const button_theme = "35, 117, 239";
@@ -75,8 +75,6 @@ export const DemoContainer = styled.div`
   @media (min-width: 1024px) {
     width: 75%;
   }
-
-
   .upload-button {
     cursor: pointer;
     padding: 1rem;
@@ -105,8 +103,6 @@ export const DemoContainer = styled.div`
 
 `;
 
-
-
 export const DemoOutput = styled.div`
   margin: 0;
   padding: 1.25rem;
@@ -119,6 +115,8 @@ export const DemoOutput = styled.div`
   justify-content: center;
   align-items: center;
   word-break: break-all;
+  width: 100%;
+
   @media (min-width: 550px) {
     width: 65%;
     margin-top: 1rem;
@@ -127,17 +125,13 @@ export const DemoOutput = styled.div`
   @media (min-width: 1024px) {
     width: 50%;
   }
-`
-
-
+`;
 
 export const DemoButton = styled(Button)`
   padding: 1rem;
   font-size: 12px;
 `;
 
-
 export const DemoInput = styled(Input)`
   display: none;
-`
-
+`;
