@@ -281,8 +281,30 @@ const SDKDemo = () => {
 
   const handleReadCustomContract = async () => {
     const contract_id = 'tQKJCf2E9lIaNTjM8ELK6ATlJtef8cVmq68c9XnVuj0'
-    const readCustomContract = await othent.readCustomContract({contract_id})
+    const readCustomContract = await othent.readCustomContract({ contract_id })
     const message = 'Read custom contract button clicked: ' + JSON.stringify(readCustomContract);
+    console.log(message);
+    setOutput(message);
+  };
+
+
+
+
+  const handleVerifyArweaveData = async () => {
+    const transactionId = 'Qi2K6IJY_VTlUJ3dszVm3Ot8UIOuMljMi8luw0ZdSnw'
+    const verifyArweaveData = await othent.verifyArweaveData({ transactionId })
+    const message = 'Verify arweave data button clicked: ' + JSON.stringify(verifyArweaveData);
+    console.log(message);
+    setOutput(message);
+  };
+
+
+
+
+  const handleVerifyBundlrData = async () => {
+    const transactionId = 'VpyBrjsQ9jlKSYda17T8Dua1P-SpbWfJvGz2V-UPvfk'
+    const verifyBundlrData = await othent.verifyBundlrData({ transactionId })
+    const message = 'Verify bundlr data button clicked: ' + JSON.stringify(verifyBundlrData);
     console.log(message);
     setOutput(message);
   };
@@ -336,6 +358,9 @@ const SDKDemo = () => {
 
           <Styled.DemoButton onClick={handleInitializeJWKClick}>Initialize JWK (WILL COMPROMISE WALLET)</Styled.DemoButton>
           <Styled.DemoButton onClick={handleJWKBackupTxnClick}>JWK Backup Txn  (WILL COMPROMISE WALLET)</Styled.DemoButton>
+
+          <Styled.DemoButton onClick={handleVerifyBundlrData}>Verify Bundlr Data</Styled.DemoButton>
+          <Styled.DemoButton onClick={handleVerifyArweaveData}>Verify Arweave Data</Styled.DemoButton>
 
         </Styled.DemoContainer>
 
