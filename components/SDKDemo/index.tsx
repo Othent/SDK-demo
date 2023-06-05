@@ -50,6 +50,7 @@ const SDKDemo = () => {
 
   const handleLogInClick = async () => {
     const logIn = await othent.logIn()
+    localStorage.setItem('othentUserDetails', JSON.stringify(logIn));
     const message = 'Log In button clicked: ' + JSON.stringify(logIn);
     console.log(message);
     setOutput(message);
@@ -57,6 +58,7 @@ const SDKDemo = () => {
 
   const handleLogOutClick = async () => {
     const logOut = await othent.logOut()
+    localStorage.removeItem('othentUserDetails');
     const message = 'Log Out button clicked: ' + JSON.stringify(logOut);
     console.log(message);
     setOutput(message);
