@@ -16,7 +16,10 @@ const SDKDemo = () => {
   const [othent, setOthent] = useState(null);
   useEffect(() => {
     const initializeOthent = async () => {
-      const othentInstance = await Othent({ API_ID: 'd7a29242f7fdede654171a0d3fd25163' });
+      const othentInstance = await Othent({ 
+        API_ID: 'd7a29242f7fdede654171a0d3fd25163', 
+        CallbackURLs: [ 'https://demo.othent.io' ] 
+      });
       setOthent(othentInstance);
     };
     initializeOthent();
