@@ -43,6 +43,15 @@ const SDKDemo = () => {
   };
 
 
+  const handleQueryWalletAddressTxns = async () => {
+    const walletAddress = (await othent.userDetails()).contract_id
+    const transactions = await othent.queryWalletAddressTxns({ walletAddress });
+    const message = 'Query a users wallet address button clicked: ' + JSON.stringify(transactions);
+    console.log(message);
+    setOutput(message);
+  };
+
+
   const handleGetAPIID = async () => {
     const API_ID = await othent.getAPIID()
     const message = 'Get API keys button clicked: ' + JSON.stringify(API_ID);
@@ -366,6 +375,8 @@ const SDKDemo = () => {
 
           <Styled.DemoButton onClick={handleVerifyBundlrData}>Verify Bundlr Data</Styled.DemoButton>
           <Styled.DemoButton onClick={handleVerifyArweaveData}>Verify Arweave Data</Styled.DemoButton>
+
+          <Styled.DemoButton onClick={handleQueryWalletAddressTxns}>Query User Txns</Styled.DemoButton>
 
         </Styled.DemoContainer>
 
