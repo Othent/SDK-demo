@@ -111,11 +111,13 @@ export const DemoOutput = styled.div`
   background: #f2f2f2;
   font-size: 12px;
   height: 100%;
+  max-height: 20rem;
   display: flex;
   justify-content: center;
   align-items: center;
   word-break: break-all;
   width: 100%;
+  overflow: auto;
 
   @media (min-width: 550px) {
     width: 65%;
@@ -126,6 +128,7 @@ export const DemoOutput = styled.div`
     width: 50%;
   }
 `;
+
 
 export const DemoButton = styled(Button)`
   padding: 1rem;
