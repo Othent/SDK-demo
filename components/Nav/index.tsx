@@ -39,8 +39,7 @@ const Nav = () => {
   useEffect(() => {
     async function createOthentInstance() {
       const othent = await Othent({ 
-        API_ID: 'd7a29242f7fdede654171a0d3fd25163', 
-        callbackURLs: [ 'https://demo.othent.io', 'https://test1.com/' ] 
+        API_ID: 'd7a29242f7fdede654171a0d3fd25163'
       });
       setOthentInstance(othent);
     }
