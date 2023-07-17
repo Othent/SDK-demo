@@ -34,14 +34,6 @@ const SDKDemo = () => {
   };
 
 
-  const handleAddCallbackURL = async () => {
-    const addCallbackURL = await othent.addCallbackURL({ callbackURL: 'https://hello.com' });
-    const message = 'Add callback URL button clicked: ' + JSON.stringify(addCallbackURL);
-    console.log(message);
-    setOutput(message);
-  };
-
-
   const handleQueryWalletAddressTxns = async () => {
     const walletAddress = (await othent.userDetails()).contract_id
     const transactions = await othent.queryWalletAddressTxns({ walletAddress });
@@ -59,6 +51,42 @@ const SDKDemo = () => {
   };
 
 
+  const handleLogInClickGoogle = async () => {
+    const logIn = await othent.logIn({ authProvider: 'google' })
+    localStorage.setItem('othentUserDetails', JSON.stringify(logIn));
+    const message = 'Log In button clicked: ' + JSON.stringify(logIn);
+    console.log(message);
+    setOutput(message);
+  };
+
+
+  const handleLogInClickApple = async () => {
+    const logIn = await othent.logIn({ authProvider: 'apple' })
+    localStorage.setItem('othentUserDetails', JSON.stringify(logIn));
+    const message = 'Log In button clicked: ' + JSON.stringify(logIn);
+    console.log(message);
+    setOutput(message);
+  };
+
+
+  const handleLogInClickEmailPass = async () => {
+    const logIn = await othent.logIn({ authProvider: 'emailPass' })
+    localStorage.setItem('othentUserDetails', JSON.stringify(logIn));
+    const message = 'Log In button clicked: ' + JSON.stringify(logIn);
+    console.log(message);
+    setOutput(message);
+  };
+
+
+  const handleLogInClickTwitter = async () => {
+    const logIn = await othent.logIn({ authProvider: 'twitter' })
+    localStorage.setItem('othentUserDetails', JSON.stringify(logIn));
+    const message = 'Log In button clicked: ' + JSON.stringify(logIn);
+    console.log(message);
+    setOutput(message);
+  };
+
+
   const handleLogInClick = async () => {
     const logIn = await othent.logIn()
     localStorage.setItem('othentUserDetails', JSON.stringify(logIn));
@@ -66,6 +94,7 @@ const SDKDemo = () => {
     console.log(message);
     setOutput(message);
   };
+
 
   const handleLogOutClick = async () => {
     const logOut = await othent.logOut()
@@ -337,9 +366,12 @@ const SDKDemo = () => {
         <Styled.DemoContainer>
 
           <Styled.DemoButton onClick={handlePingClick}>Ping</Styled.DemoButton>
-          <Styled.DemoButton onClick={handleAddCallbackURL}>Add callback URL</Styled.DemoButton>
           <Styled.DemoButton onClick={handleGetAPIID}>API ID</Styled.DemoButton>
-          <Styled.DemoButton onClick={handleLogInClick}>Log In</Styled.DemoButton>
+          <Styled.DemoButton onClick={handleLogInClick}>Log In - ALL</Styled.DemoButton>
+          <Styled.DemoButton onClick={handleLogInClickGoogle}>Log In - Google</Styled.DemoButton>
+          <Styled.DemoButton onClick={handleLogInClickApple}>Log In - Apple</Styled.DemoButton>
+          <Styled.DemoButton onClick={handleLogInClickEmailPass}>Log In - emailPass</Styled.DemoButton>
+          <Styled.DemoButton onClick={handleLogInClickTwitter}>Log In - Twitter</Styled.DemoButton>
           <Styled.DemoButton onClick={handleLogOutClick}>Log Out</Styled.DemoButton>
           <Styled.DemoButton onClick={handleUserDetailsClick}>User Details</Styled.DemoButton>
 
