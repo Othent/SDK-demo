@@ -348,6 +348,22 @@ const SDKDemo = () => {
 
 
 
+
+
+  const handleDeployWarpContract = async () => {
+    const contractSrc = await (await fetch('/contract-new.js')).text()
+    console.log(contractSrc)
+    const state = { testState: 'testState' }
+    const tags = [ { name: 'testTag', value: 'testTag' } ]
+    const deployWarpContractFunc = await othent.deployWarpContract({ contractSrc, state, tags })
+    console.log(deployWarpContractFunc)
+    const message = 'Deploy Warp contract button clicked: ' + JSON.stringify(deployWarpContractFunc);
+    console.log(message);
+    setOutput(message);
+  };
+
+
+
   
 
 
@@ -402,8 +418,10 @@ const SDKDemo = () => {
 
           <Styled.DemoButton onClick={handleQueryWalletAddressTxns}>Query User Txns</Styled.DemoButton>
 
-          {/* <Styled.DemoButton onClick={handleEncryptData}>Encrypt Data</Styled.DemoButton>
-          <Styled.DemoButton onClick={handleDecryptData}>Decrypt Data</Styled.DemoButton> */}
+          <Styled.DemoButton onClick={handleEncryptData}>Encrypt Data</Styled.DemoButton>
+          <Styled.DemoButton onClick={handleDecryptData}>Decrypt Data</Styled.DemoButton>
+
+          <Styled.DemoButton onClick={handleDeployWarpContract}>Deploy Warp Contract</Styled.DemoButton>
 
         </Styled.DemoContainer>
 
