@@ -352,7 +352,6 @@ const SDKDemo = () => {
 
   const handleDeployWarpContract = async () => {
     const contractSrc = await (await fetch('/contract-new.js')).text()
-    console.log(contractSrc)
     const state = { testState: 'testState' }
     const tags = [ { name: 'testTag', value: 'testTag' } ]
     const deployWarpContractFunc = await othent.deployWarpContract({ contractSrc, state, tags })
