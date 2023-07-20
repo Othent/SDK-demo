@@ -323,6 +323,31 @@ const SDKDemo = () => {
   };
 
 
+
+  const handleEncryptData = async () => {
+    const data = 'I want this data encrypted!'
+    const key = 'password'
+    const encryptDataFunc = await othent.encryptData({ data, key })
+    console.log(encryptDataFunc)
+    const message = 'Encrypt data button clicked: ' + JSON.stringify(encryptDataFunc);
+    console.log(message);
+    setOutput(message);
+  };
+
+
+
+  const handleDecryptData = async () => {
+    const data = 'U2FsdGVkX18UJhCMMYDWOHGIL+WBzFKepI3I5T7oZmxsZ4Ll1W+4CnTny8PNNkm3'
+    const key = 'password'
+    const decryptDataFunc = await othent.decryptData({ data, key })
+    console.log(decryptDataFunc)
+    const message = 'Decrypt data button clicked: ' + JSON.stringify(decryptDataFunc);
+    console.log(message);
+    setOutput(message);
+  };
+
+
+
   
 
 
@@ -376,6 +401,9 @@ const SDKDemo = () => {
           <Styled.DemoButton onClick={handleVerifyArweaveData}>Verify Arweave Data</Styled.DemoButton>
 
           <Styled.DemoButton onClick={handleQueryWalletAddressTxns}>Query User Txns</Styled.DemoButton>
+
+          {/* <Styled.DemoButton onClick={handleEncryptData}>Encrypt Data</Styled.DemoButton>
+          <Styled.DemoButton onClick={handleDecryptData}>Decrypt Data</Styled.DemoButton> */}
 
         </Styled.DemoContainer>
 
