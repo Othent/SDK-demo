@@ -337,7 +337,7 @@ const SDKDemo = () => {
 
 
   const handleDecryptData = async () => {
-    const data = 'U2FsdGVkX18UJhCMMYDWOHGIL+WBzFKepI3I5T7oZmxsZ4Ll1W+4CnTny8PNNkm3'
+    const data = 'U2FsdGVkX19sTWaZP0ST2zb7zvbTvvGU6lN0btbzGP3r13rSgZa8rgr4+XZG+yGX'
     const key = 'password'
     const decryptDataFunc = await othent.decryptData({ data, key })
     console.log(decryptDataFunc)
