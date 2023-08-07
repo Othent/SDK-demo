@@ -1,11 +1,7 @@
 import { useState, useEffect } from 'react';
-import { FeatureTextSmall } from '../common';
-import { DMSans700, SpaceGrotesk700, DMSans500 } from '../../utils/fonts';
-import { AnimatePresence, motion } from 'framer-motion';
 import * as Styled from './styles';
-import Button from '../Button'
-import styled from 'styled-components';
 import { Othent } from 'othent';
+
 
 
 const SDKDemo = () => {
@@ -61,6 +57,15 @@ const SDKDemo = () => {
 
   const handleLogInClick = async () => {
     const logIn = await othent.logIn()
+    localStorage.setItem('othentUserDetails', JSON.stringify(logIn));
+    const message = 'Log In button clicked: ' + JSON.stringify(logIn);
+    console.log(message);
+    setOutput(message);
+  };
+
+
+  const handleLogInClickTestNet = async () => {
+    const logIn = await othent.logIn({ testNet: true })
     localStorage.setItem('othentUserDetails', JSON.stringify(logIn));
     const message = 'Log In button clicked: ' + JSON.stringify(logIn);
     console.log(message);
@@ -130,6 +135,31 @@ const SDKDemo = () => {
 
       const response = await othent.sendTransactionWarp(signedTransaction);
       const message = 'Send transaction Warp button clicked: ' + JSON.stringify(response)
+      console.log(message)
+      setOutput(JSON.stringify(message));
+    } catch (error) {
+      setOutput(JSON.stringify(error));
+    }
+  };
+
+
+  const handleSendTransactionWarpTestNet = async () => {
+    try {
+      const signedTransaction = await othent.signTransactionWarp({
+        othentFunction: 'sendTransaction', 
+        data: {
+          toContractId: 'PeBfMsUx1DZ_Y48qv9LuO4VyyFdhCAQBOvjedIpZ7eA', // this will fail
+          toContractFunction: 'createPost', 
+          txnData: { post: 'Lorimer TEST' } 
+        }, 
+        tags: [ 
+          {name: 'Test', value: 'Tag'} 
+        ],
+        testNet: true
+      });
+
+      const response = await othent.sendTransactionWarp(signedTransaction);
+      const message = 'Send transaction War Test Net button clicked: ' + JSON.stringify(response)
       console.log(message)
       setOutput(JSON.stringify(message));
     } catch (error) {
@@ -375,13 +405,16 @@ const SDKDemo = () => {
 
 
         <Styled.DemoContainer>
-
+        
           <Styled.DemoButton onClick={handlePingClick}>Ping</Styled.DemoButton>
           <Styled.DemoButton onClick={handleAddCallbackURL}>Add callback URL</Styled.DemoButton>
           <Styled.DemoButton onClick={handleGetAPIID}>API ID</Styled.DemoButton>
           <Styled.DemoButton onClick={handleLogInClick}>Log In</Styled.DemoButton>
+          <Styled.DemoButton onClick={handleLogInClickTestNet}>Log In Testnet</Styled.DemoButton>
           <Styled.DemoButton onClick={handleLogOutClick}>Log Out</Styled.DemoButton>
           <Styled.DemoButton onClick={handleUserDetailsClick}>User Details</Styled.DemoButton>
+
+          <Styled.DemoButton onClick={handleSendTransactionWarpTestNet}>Send Transaction Warp Test Net</Styled.DemoButton>
 
           <Styled.DemoButton onClick={handleReadContractClick}>Read Contract</Styled.DemoButton>
           <Styled.DemoButton onClick={handleSignTransactionWarp}>Sign Transaction Warp</Styled.DemoButton>
