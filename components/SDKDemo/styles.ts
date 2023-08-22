@@ -77,10 +77,8 @@ export const DemoContainer = styled.div`
   }
   .upload-button {
     cursor: pointer;
-    padding: 1rem;
     border-radius: 8px;
     border: 2px solid rgba(${button_theme}, 0);
-    font-size: 12px;
     text-align: center;
     display: flex;
     align-items: center;
@@ -91,6 +89,10 @@ export const DemoContainer = styled.div`
     background: rgb(${button_theme});
     transition: all .23s ease-in-out;
 
+    padding: 0.3rem;
+    font-size: 8px;
+    margin: 5px;
+
     &:hover {
       background: rgba(${button_theme}, 0.8);
     }
@@ -99,6 +101,11 @@ export const DemoContainer = styled.div`
       background: rgba(${button_active}, 1);
       border-color: rgba(${button_active}, 1);
     }
+  }
+
+  h3 {
+    margin: 20px;
+    text-align: center;
   }
 
 `;
@@ -131,8 +138,9 @@ export const DemoOutput = styled.div`
 
 
 export const DemoButton = styled(Button)`
-  padding: 1rem;
-  font-size: 12px;
+  padding: 0.3rem;
+  font-size: 8px;
+  margin: 5px;
 `;
 
 export const DemoInput = styled(Input)`

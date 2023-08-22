@@ -30,14 +30,6 @@ const SDKDemo = () => {
   };
 
 
-  const handleAddCallbackURL = async () => {
-    const addCallbackURL = await othent.addCallbackURL({ callbackURL: 'https://hello.com' });
-    const message = 'Add callback URL button clicked: ' + JSON.stringify(addCallbackURL);
-    console.log(message);
-    setOutput(message);
-  };
-
-
   const handleQueryWalletAddressTxns = async () => {
     const walletAddress = (await othent.userDetails()).contract_id
     const transactions = await othent.queryWalletAddressTxns({ walletAddress });
@@ -143,6 +135,34 @@ const SDKDemo = () => {
   };
 
 
+
+
+
+  const handleSignTransactionWarpTestNet = async () => {
+    try {
+      const response = await othent.signTransactionWarp({
+        othentFunction: 'sendTransaction', 
+        data: {
+          toContractId: '2W9NoIJM1SuaFUaSOJsui_5lD_NvCHTjez5HKe2SjYU', 
+          toContractFunction: 'createPost', 
+          txnData: { post: 'Othent TEST TEST' } 
+        }, 
+        tags: [ 
+          {name: 'Test', value: 'Tag'} 
+        ],
+        testNet: true
+      });
+      const message = 'Sign transaction Warp Test Net button clicked: ' + JSON.stringify(response)
+      setOutput(JSON.stringify(message));
+      console.log(message)
+    } catch (error) {
+      setOutput(JSON.stringify(error));
+    }
+  };
+
+
+
+
   const handleSendTransactionWarpTestNet = async () => {
     try {
       const signedTransaction = await othent.signTransactionWarp({
@@ -159,7 +179,7 @@ const SDKDemo = () => {
       });
 
       const response = await othent.sendTransactionWarp(signedTransaction);
-      const message = 'Send transaction War Test Net button clicked: ' + JSON.stringify(response)
+      const message = 'Send transaction Warp Test Net button clicked: ' + JSON.stringify(response)
       console.log(message)
       setOutput(JSON.stringify(message));
     } catch (error) {
@@ -332,6 +352,16 @@ const SDKDemo = () => {
 
 
 
+  const handleReadCustomContractTestNet = async () => {
+    const contract_id = '_jABPUwl2cv6_rgFXdKnXiBhKQlbcsh_2BxGQes6ws8'
+    const readCustomContract = await othent.readCustomContract({ contract_id, testNet: true })
+    const message = 'Read custom contract button clicked: ' + JSON.stringify(readCustomContract);
+    console.log(message);
+    setOutput(message);
+  };
+
+
+
 
   const handleVerifyArweaveData = async () => {
     const transactionId = 'Qi2K6IJY_VTlUJ3dszVm3Ot8UIOuMljMi8luw0ZdSnw'
@@ -385,8 +415,18 @@ const SDKDemo = () => {
     const state = { testState: 'testState' }
     const tags = [ { name: 'testTag', value: 'testTag' } ]
     const deployWarpContractFunc = await othent.deployWarpContract({ contractSrc, state, tags })
-    console.log(deployWarpContractFunc)
     const message = 'Deploy Warp contract button clicked: ' + JSON.stringify(deployWarpContractFunc);
+    console.log(message);
+    setOutput(message);
+  };
+
+
+  const handleDeployWarpContractTestNet = async () => {
+    const contractSrc = await (await fetch('/contract-new.js')).text()
+    const state = { testState: 'testState' }
+    const tags = [ { name: 'testTag', value: 'testTag' } ]
+    const deployWarpContractFunc = await othent.deployWarpContract({ contractSrc, state, tags, testNet: true })
+    const message = 'Deploy Warp contract Test Net button clicked: ' + JSON.stringify(deployWarpContractFunc);
     console.log(message);
     setOutput(message);
   };
@@ -405,55 +445,71 @@ const SDKDemo = () => {
 
 
         <Styled.DemoContainer>
+
+          <div>
+            <h3>Utils</h3>
+            <Styled.DemoButton onClick={handlePingClick}>Ping</Styled.DemoButton>
+            <Styled.DemoButton onClick={handleGetAPIID}>API ID</Styled.DemoButton>
+            <Styled.DemoButton onClick={handleLogOutClick}>Log Out</Styled.DemoButton>
+            <Styled.DemoButton onClick={handleUserDetailsClick}>User Details</Styled.DemoButton>
+            <Styled.DemoButton onClick={handleQueryWalletAddressTxns}>Query User Txns</Styled.DemoButton>
+            <Styled.DemoButton onClick={handleEncryptData}>Encrypt Data</Styled.DemoButton>
+            <Styled.DemoButton onClick={handleDecryptData}>Decrypt Data</Styled.DemoButton>
+          </div>
+
+
+          <div>
+            <h3>Mainnet Warp</h3>
+            <Styled.DemoButton onClick={handleLogInClick}>Log In</Styled.DemoButton>
+            <Styled.DemoButton onClick={handleSignTransactionWarp}>Sign Transaction Warp</Styled.DemoButton>
+            <Styled.DemoButton onClick={handleSendTransactionWarp}>Send Transaction Warp</Styled.DemoButton>
+            <Styled.DemoButton onClick={handleReadContractClick}>Read Contract</Styled.DemoButton>
+            <Styled.DemoButton onClick={handleReadCustomContract}>Read Custom Contract</Styled.DemoButton>
+            <Styled.DemoButton onClick={handleInitializeJWKClick}>Initialize JWK (WILL COMPROMISE WALLET)</Styled.DemoButton>
+            <Styled.DemoButton onClick={handleJWKBackupTxnClick}>JWK Backup Txn  (WILL COMPROMISE WALLET)</Styled.DemoButton>
+            <Styled.DemoButton onClick={handleDeployWarpContract}>Deploy Warp Contract</Styled.DemoButton>
+          </div>
+
+
+          <div>
+            <h3>Testnet Warp</h3>
+            <Styled.DemoButton onClick={handleLogInClickTestNet}>Log In Testnet</Styled.DemoButton>
+            <Styled.DemoButton onClick={handleSignTransactionWarpTestNet}>Sign Transaction Testnet</Styled.DemoButton>
+            <Styled.DemoButton onClick={handleSendTransactionWarpTestNet}>Send Transaction Testnet</Styled.DemoButton>
+            <Styled.DemoButton onClick={handleReadCustomContractTestNet}>Read Custom Contract Testnet</Styled.DemoButton>
+            <Styled.DemoButton onClick={handleDeployWarpContractTestNet}>Deploy Contract Testnet</Styled.DemoButton>
+          </div>
+
+
+          <div>
+            <h3>Upload Data</h3>
+
+            <label className="upload-button" htmlFor="file-input-sign-a">
+              <span>Sign Arweave Data</span>
+            </label>
+            <Styled.DemoInput id="file-input-sign-a" type="file" onChange={handleFileUploadSignArweave} />
+
+            <label className="upload-button" htmlFor="file-input-upload-a">
+              <span>Upload Arweave Data</span>
+            </label>
+            <Styled.DemoInput id="file-input-upload-a" type="file" onChange={handleFileUploadSendArweave} />
+
+            <label className="upload-button" htmlFor="file-input-sign-b">
+              <span>Sign Bundlr Data</span>
+            </label>
+            <Styled.DemoInput id="file-input-sign-b" type="file" onChange={handleFileUploadSignBundlr} />
+
+            <label className="upload-button" htmlFor="file-input-upload-b">
+              <span>Upload Bundlr Data</span>
+            </label>
+            <Styled.DemoInput id="file-input-upload-b" type="file" onChange={handleFileUploadSendBundlr} />
+
+            <Styled.DemoButton onClick={handleVerifyBundlrData}>Verify Bundlr Data</Styled.DemoButton>
+            <Styled.DemoButton onClick={handleVerifyArweaveData}>Verify Arweave Data</Styled.DemoButton>
+
+          </div>
         
-          <Styled.DemoButton onClick={handlePingClick}>Ping</Styled.DemoButton>
-          <Styled.DemoButton onClick={handleAddCallbackURL}>Add callback URL</Styled.DemoButton>
-          <Styled.DemoButton onClick={handleGetAPIID}>API ID</Styled.DemoButton>
-          <Styled.DemoButton onClick={handleLogInClick}>Log In</Styled.DemoButton>
-          <Styled.DemoButton onClick={handleLogInClickTestNet}>Log In Testnet</Styled.DemoButton>
-          <Styled.DemoButton onClick={handleLogOutClick}>Log Out</Styled.DemoButton>
-          <Styled.DemoButton onClick={handleUserDetailsClick}>User Details</Styled.DemoButton>
-
-          <Styled.DemoButton onClick={handleSendTransactionWarpTestNet}>Send Transaction Warp Test Net</Styled.DemoButton>
-
-          <Styled.DemoButton onClick={handleReadContractClick}>Read Contract</Styled.DemoButton>
-          <Styled.DemoButton onClick={handleSignTransactionWarp}>Sign Transaction Warp</Styled.DemoButton>
-          <Styled.DemoButton onClick={handleSendTransactionWarp}>Send Transaction Warp</Styled.DemoButton>
-          <Styled.DemoButton onClick={handleReadCustomContract}>Read Custom Contract</Styled.DemoButton>
-
-          <label className="upload-button" htmlFor="file-input-sign-a">
-            <span>Sign Arweave Data</span>
-          </label>
-          <Styled.DemoInput id="file-input-sign-a" type="file" onChange={handleFileUploadSignArweave} />
-
-          <label className="upload-button" htmlFor="file-input-upload-a">
-            <span>Upload Arweave Data</span>
-          </label>
-          <Styled.DemoInput id="file-input-upload-a" type="file" onChange={handleFileUploadSendArweave} />
-
-          <label className="upload-button" htmlFor="file-input-sign-b">
-            <span>Sign Bundlr Data</span>
-          </label>
-          <Styled.DemoInput id="file-input-sign-b" type="file" onChange={handleFileUploadSignBundlr} />
-
-          <label className="upload-button" htmlFor="file-input-upload-b">
-            <span>Upload Bundlr Data</span>
-          </label>
-          <Styled.DemoInput id="file-input-upload-b" type="file" onChange={handleFileUploadSendBundlr} />
-
-
-          <Styled.DemoButton onClick={handleInitializeJWKClick}>Initialize JWK (WILL COMPROMISE WALLET)</Styled.DemoButton>
-          <Styled.DemoButton onClick={handleJWKBackupTxnClick}>JWK Backup Txn  (WILL COMPROMISE WALLET)</Styled.DemoButton>
-
-          <Styled.DemoButton onClick={handleVerifyBundlrData}>Verify Bundlr Data</Styled.DemoButton>
-          <Styled.DemoButton onClick={handleVerifyArweaveData}>Verify Arweave Data</Styled.DemoButton>
-
-          <Styled.DemoButton onClick={handleQueryWalletAddressTxns}>Query User Txns</Styled.DemoButton>
-
-          <Styled.DemoButton onClick={handleEncryptData}>Encrypt Data</Styled.DemoButton>
-          <Styled.DemoButton onClick={handleDecryptData}>Decrypt Data</Styled.DemoButton>
-
-          <Styled.DemoButton onClick={handleDeployWarpContract}>Deploy Warp Contract</Styled.DemoButton>
+          
 
         </Styled.DemoContainer>
 
