@@ -456,9 +456,9 @@ const SDKDemo = () => {
 
 
   const handleViewCustomContract = async () => {
-    const func = ''
-    const tags = [ { name: 'testTag', value: 'testTag' } ]
-    const contract_id = ''
+    const func = 'createPost'
+    const tags = []
+    const contract_id = 'tQKJCf2E9lIaNTjM8ELK6ATlJtef8cVmq68c9XnVuj0'
     const deployWarpContractFunc = await othent.viewCustomContract({ function: func, tags, contract_id })
     const message = 'Deploy Warp contract button clicked: ' + JSON.stringify(deployWarpContractFunc);
     console.log(message);
@@ -468,9 +468,9 @@ const SDKDemo = () => {
 
 
   const handleViewCustomContractTestNet = async () => {
-    const func = ''
-    const tags = [ { name: 'testTag', value: 'testTag' } ]
-    const contract_id = ''
+    const func = 'createPost'
+    const tags = []
+    const contract_id = 'ARMqvgb4xzXI7zLhWLh7w_9-qwb5SykhOTqHtO9JZ3U'
     const deployWarpContractFunc = await othent.viewCustomContract({ function: func, tags, contract_id, testNet: true })
     const message = 'Deploy Warp contract test net button clicked: ' + JSON.stringify(deployWarpContractFunc);
     console.log(message);
