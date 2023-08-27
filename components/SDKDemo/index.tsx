@@ -143,7 +143,7 @@ const SDKDemo = () => {
       const response = await othent.signTransactionWarp({
         othentFunction: 'sendTransaction', 
         data: {
-          toContractId: '2W9NoIJM1SuaFUaSOJsui_5lD_NvCHTjez5HKe2SjYU', 
+          toContractId: 'UeshxhDA7yKUyCyHhTAzFCuTo0AYNOiHDtthT9UqyWI', 
           toContractFunction: 'createPost', 
           txnData: { post: 'Othent TEST TEST' } 
         }, 
@@ -168,7 +168,7 @@ const SDKDemo = () => {
       const signedTransaction = await othent.signTransactionWarp({
         othentFunction: 'sendTransaction', 
         data: {
-          toContractId: 'PeBfMsUx1DZ_Y48qv9LuO4VyyFdhCAQBOvjedIpZ7eA', // this will fail
+          toContractId: 'ARMqvgb4xzXI7zLhWLh7w_9-qwb5SykhOTqHtO9JZ3U',
           toContractFunction: 'createPost', 
           txnData: { post: 'Lorimer TEST' } 
         }, 
@@ -353,7 +353,7 @@ const SDKDemo = () => {
 
 
   const handleReadCustomContractTestNet = async () => {
-    const contract_id = '_jABPUwl2cv6_rgFXdKnXiBhKQlbcsh_2BxGQes6ws8'
+    const contract_id = 'ARMqvgb4xzXI7zLhWLh7w_9-qwb5SykhOTqHtO9JZ3U'
     const readCustomContract = await othent.readCustomContract({ contract_id, testNet: true })
     const message = 'Read custom contract button clicked: ' + JSON.stringify(readCustomContract);
     console.log(message);
@@ -426,10 +426,34 @@ const SDKDemo = () => {
     const state = { testState: 'testState' }
     const tags = [ { name: 'testTag', value: 'testTag' } ]
     const deployWarpContractFunc = await othent.deployWarpContract({ contractSrc, state, tags, testNet: true })
-    const message = 'Deploy Warp contract Test Net button clicked: ' + JSON.stringify(deployWarpContractFunc);
+    const message = 'Deploy Warp contract test net button clicked: ' + JSON.stringify(deployWarpContractFunc);
     console.log(message);
     setOutput(message);
   };
+
+
+  const handleDeployWarpContractFromTx = async () => {
+    const srcTxId = 'vnzoKP1yDyBvJsbLTQarhEzQ3RrD61noAx5w63nnAgU'
+    const state = { testState: 'testState' }
+    const tags = [ { name: 'testTag', value: 'testTag' } ]
+    const deployWarpContractFunc = await othent.deployWarpContractFromTx({ srcTxId, state, tags })
+    const message = 'Deploy Warp contract from tx button clicked: ' + JSON.stringify(deployWarpContractFunc);
+    console.log(message);
+    setOutput(message);
+  };
+
+
+  const handleDeployWarpContractFromTxTestNet = async () => {
+    const srcTxId = 'n-oOW5tNw-Fu2eJ2A94HIaV0R6UHm8q7373G4ACmCXc'
+    const state = { testState: 'testState' }
+    const tags = [ { name: 'testTag', value: 'testTag' } ]
+    const deployWarpContractFunc = await othent.deployWarpContractFromTx({ srcTxId, state, tags, testNet: true })
+    const message = 'Deploy Warp contract from tx test net button clicked: ' + JSON.stringify(deployWarpContractFunc);
+    console.log(message);
+    setOutput(message);
+  };
+
+
 
 
 
@@ -439,7 +463,7 @@ const SDKDemo = () => {
   return (
     <Styled.MainWrapper>
 
-      <Styled.Container >
+      <Styled.Container>
 
         <Styled.DemoOutput>{output}</Styled.DemoOutput>
 
@@ -468,6 +492,7 @@ const SDKDemo = () => {
             <Styled.DemoButton onClick={handleInitializeJWKClick}>Initialize JWK (WILL COMPROMISE WALLET)</Styled.DemoButton>
             <Styled.DemoButton onClick={handleJWKBackupTxnClick}>JWK Backup Txn  (WILL COMPROMISE WALLET)</Styled.DemoButton>
             <Styled.DemoButton onClick={handleDeployWarpContract}>Deploy Warp Contract</Styled.DemoButton>
+            <Styled.DemoButton onClick={handleDeployWarpContractFromTx}>Deploy Warp Contract From Tx</Styled.DemoButton>
           </div>
 
 
@@ -478,6 +503,7 @@ const SDKDemo = () => {
             <Styled.DemoButton onClick={handleSendTransactionWarpTestNet}>Send Transaction Testnet</Styled.DemoButton>
             <Styled.DemoButton onClick={handleReadCustomContractTestNet}>Read Custom Contract Testnet</Styled.DemoButton>
             <Styled.DemoButton onClick={handleDeployWarpContractTestNet}>Deploy Contract Testnet</Styled.DemoButton>
+            <Styled.DemoButton onClick={handleDeployWarpContractFromTxTestNet}>Deploy Contract From Tx Testnet</Styled.DemoButton>
           </div>
 
 
