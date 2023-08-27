@@ -455,6 +455,30 @@ const SDKDemo = () => {
 
 
 
+  const handleViewCustomContract = async () => {
+    const func = ''
+    const tags = [ { name: 'testTag', value: 'testTag' } ]
+    const contract_id = ''
+    const deployWarpContractFunc = await othent.viewCustomContract({ function: func, tags, contract_id })
+    const message = 'Deploy Warp contract button clicked: ' + JSON.stringify(deployWarpContractFunc);
+    console.log(message);
+    setOutput(message);
+  };
+
+
+
+  const handleViewCustomContractTestNet = async () => {
+    const func = ''
+    const tags = [ { name: 'testTag', value: 'testTag' } ]
+    const contract_id = ''
+    const deployWarpContractFunc = await othent.viewCustomContract({ function: func, tags, contract_id, testNet: true })
+    const message = 'Deploy Warp contract test net button clicked: ' + JSON.stringify(deployWarpContractFunc);
+    console.log(message);
+    setOutput(message);
+  };
+
+
+
 
 
   
@@ -493,6 +517,7 @@ const SDKDemo = () => {
             <Styled.DemoButton onClick={handleJWKBackupTxnClick}>JWK Backup Txn  (WILL COMPROMISE WALLET)</Styled.DemoButton>
             <Styled.DemoButton onClick={handleDeployWarpContract}>Deploy Warp Contract</Styled.DemoButton>
             <Styled.DemoButton onClick={handleDeployWarpContractFromTx}>Deploy Warp Contract From Tx</Styled.DemoButton>
+            <Styled.DemoButton onClick={handleViewCustomContract}>View Custom Contract State</Styled.DemoButton>
           </div>
 
 
@@ -504,6 +529,7 @@ const SDKDemo = () => {
             <Styled.DemoButton onClick={handleReadCustomContractTestNet}>Read Custom Contract Testnet</Styled.DemoButton>
             <Styled.DemoButton onClick={handleDeployWarpContractTestNet}>Deploy Contract Testnet</Styled.DemoButton>
             <Styled.DemoButton onClick={handleDeployWarpContractFromTxTestNet}>Deploy Contract From Tx Testnet</Styled.DemoButton>
+            <Styled.DemoButton onClick={handleViewCustomContractTestNet}>View Custom Contract State Testnet</Styled.DemoButton>
           </div>
 
 
