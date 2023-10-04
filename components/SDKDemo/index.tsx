@@ -344,7 +344,7 @@ const SDKDemo = () => {
 
   const handleReadCustomContract = async () => {
     const contract_id = 'tQKJCf2E9lIaNTjM8ELK6ATlJtef8cVmq68c9XnVuj0'
-    const readCustomContract = await othent.readCustomContract({ contract_id })
+    const readCustomContract = await othent.readCustomContract({ contract_id, customDREURL: 'https://dre-aftr.warp.cc/' })
     const message = 'Read custom contract button clicked: ' + JSON.stringify(readCustomContract);
     console.log(message);
     setOutput(message);
@@ -476,7 +476,6 @@ const SDKDemo = () => {
     console.log(message);
     setOutput(message);
   };
-
 
 
 
